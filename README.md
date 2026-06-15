@@ -115,7 +115,13 @@ docker compose exec -T postgres psql -U $POSTGRES_USER $POSTGRES_DB < backup_YYY
 
 ---
 
-## Para staging y producción
+## Desplegar en Render
+
+Ver guía completa: [docs/render.md](docs/render.md)
+
+---
+
+## Para staging y producción local
 
 1. Cambiar `SITE_URL` al dominio real (`https://secrets.orbidi.com`)
 2. Poner Infisical detrás de un reverse proxy con HTTPS (nginx o Caddy)
