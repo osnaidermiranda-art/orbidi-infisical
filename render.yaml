@@ -1,35 +1,36 @@
 services:
-  - type: web
-    name: infisical
-    runtime: image
-    image:
-      url: docker.io/infisical/infisical:latest-postgres
-    plan: starter
-    healthCheckPath: /api/status
-    envVars:
-      - key: ENCRYPTION_KEY
-        sync: false
-      - key: AUTH_SECRET
-        sync: false
-      - key: SITE_URL
-        sync: false
-      - key: DB_CONNECTION_URI
-        fromDatabase:
-          name: infisical-db
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: infisical-redis
-          property: connectionString
+    - type: web
+      name: infisical
+      runtime: image
+      image:
+          url: docker.io/infisical/infisical:latest-postgres
+      plan: starter
+      healthCheckPath: /api/status
+      envVars:
+          - key: ENCRYPTION_KEY
+            sync: false
+          - key: AUTH_SECRET
+            sync: false
+          - key: SITE_URL
+            sync: false
+          - key: DB_CONNECTION_URI
+            fromDatabase:
+                name: infisical-db
+                property: connectionString
+          - key: REDIS_URL
+            fromService:
+                type: redis
+                name: infisical-redis
+                property: connectionString
 
-  - type: redis
-    name: infisical-redis
-    plan: free
-    maxmemoryPolicy: noeviction
+    - type: redis
+      name: infisical-redis
+      plan: free
+      maxmemoryPolicy: noeviction
+      ipAllowList: []
 
 databases:
-  - name: infisical-db
-    databaseName: infisical
-    user: infisical
-    plan: free
+    - name: infisical-db
+      databaseName: infisical
+      user: infisical
+      plan: free
